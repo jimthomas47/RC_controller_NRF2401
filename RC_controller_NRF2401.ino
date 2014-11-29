@@ -84,7 +84,7 @@ void setup() {
   radio.begin();
   radio.setChannel(0x42); // change the radio channel from default (0x4C = 76) 
   radio.setDataRate (RF24_250KBPS); // lowest data rate to achieve more range and reliability
-  //radio.setPayloadSize(10);
+  radio.setPayloadSize(10); // 10 bytes in payload
   radio.openWritingPipe(pipe);
   radio.printDetails();
 
@@ -109,11 +109,10 @@ void loop() {
 
   s_register = sRegisterRead(); // read the button states
   /*
-  //debug print 
    Serial.print(s_register,BIN);
    printf(" %4i %4i %4i %4i ",joy_RUD,joy_RLR,joy_LUD,joy_LLR);
    printf("\n");
-   */
+  */ 
 
   // transmit the 10 byte payload
   payload_t payload = {s_register,joy_RUD,joy_RLR,joy_LUD,joy_LLR    };
